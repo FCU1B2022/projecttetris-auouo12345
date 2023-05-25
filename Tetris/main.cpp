@@ -3,7 +3,8 @@
 int main(void)
 {
     srand(time(NULL));
-    State state = {
+    State state = 
+    {
         WIDTH / 2,
         0,
         0,
@@ -11,7 +12,7 @@ int main(void)
         0
     };
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 4; i++)
     {
         state.queue[i] = rand() % 7;
     }

@@ -212,34 +212,32 @@ bool move(Block canvas[HEIGHT][WIDTH], int originalX, int originalY, int origina
     int size = shapeData.size;
 
     // check if the new position is valid to place the block
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size; j++) {
-            if (shapeData.rotates[newRotate][i][j]) {
-                if (newX + j < 0 || newX + j >= WIDTH || newY + i < 0 || newY + i >= HEIGHT) {
-                    return false;
-                }
-                if (!canvas[newY + i][newX + j].current && canvas[newY + i][newX + j].shape != EMPTY) {
-                    return false;
-                }
+    for (int i = 0; i < size; i++) 
+    {
+        for (int j = 0; j < size; j++) 
+        {
+            if (shapeData.rotates[newRotate][i][j]) 
+            {
+                if (newX + j < 0 || newX + j >= WIDTH || newY + i < 0 || newY + i >= HEIGHT) return false;
+                if (!canvas[newY + i][newX + j].current && canvas[newY + i][newX + j].shape != EMPTY) return false;
             }
         }
     }
 
     // remove the old position
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size; j++) {
-            if (shapeData.rotates[originalRotate][i][j]) {
-                resetBlock(&canvas[originalY + i][originalX + j]);
-            }
+    for (int i = 0; i < size; i++) 
+    {
+        for (int j = 0; j < size; j++) 
+        {
+            if (shapeData.rotates[originalRotate][i][j]) resetBlock(&canvas[originalY + i][originalX + j]);
         }
     }
 
     // move the block
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size; i++) 
+    {
         for (int j = 0; j < size; j++) {
-            if (shapeData.rotates[newRotate][i][j]) {
-                setBlock(&canvas[newY + i][newX + j], shapeData.color, shapeId, true);
-            }
+            if (shapeData.rotates[newRotate][i][j]) setBlock(&canvas[newY + i][newX + j], shapeData.color, shapeId, true);
         }
     }
 
@@ -249,11 +247,10 @@ bool move(Block canvas[HEIGHT][WIDTH], int originalX, int originalY, int origina
 void printCanvas(Block canvas[HEIGHT][WIDTH], State* state)
 {
     printf("\033[0;0H\n");
-    for (int i = 0; i < HEIGHT; i++) {
+    for (int i = 0; i < HEIGHT; i++) 
+    {
         printf("|");
-        for (int j = 0; j < WIDTH; j++) {
-            printf("\033[%dm\u3000", canvas[i][j].color);
-        }
+        for (int j = 0; j < WIDTH; j++) printf("\033[%dm\u3000", canvas[i][j].color);
         printf("\033[0m|\n");
     }
     return;
@@ -261,7 +258,6 @@ void printCanvas(Block canvas[HEIGHT][WIDTH], State* state)
 
 void logic(Block canvas[HEIGHT][WIDTH], State* state)
 {
-    if (move(canvas, state->x, state->y, state->rotate, state->x, state->y + 1, state->rotate, state->queue[0]))
-        state->y++;
+    if (move(canvas, state->x, state->y, state->rotate, state->x, state->y + 1, state->rotate, state->queue[0])) state->y++;
     return;
 }
